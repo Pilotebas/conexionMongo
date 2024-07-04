@@ -1,4 +1,4 @@
-import { connect } from "../../helper/db/connect.js";
+import { connect } from "../../helpers/db/connect.js";
 
 
 export class movis extends connect {
@@ -8,14 +8,20 @@ export class movis extends connect {
             return movis.instance;
         }
         super();
-        this.collection = this.db.collection("movie");
+        this.collection = this.db.collection("movis");
         movis.instance = this;
         return this;
     }
 
     async getAllMovis(){
-        let res = await this.collection.find({},{}).toArray();
-        await this.conexion.closer()
-        return res;
+        let res = await this.collection.aggregate([
+            {
+                $project: {
+                    name:1
+                }
+            }
+
+        ]).toArray();
+        return res
     }
 }
