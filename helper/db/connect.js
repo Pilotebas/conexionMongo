@@ -7,8 +7,8 @@ export class connect {
     #pass;
     #host;
     #cluster;
-    #dbName
-    constructor({user : u, port : p, pass: w, host: h, cluster: c, dbName: d} = {user: "mongo", port: 47797, pass: 'PNSmQbweckrbuFTCqXmYoaqicgEZpFeF', host: 'mongodb://', cluster: "monorail.proxy.rlwy.net", dbName: 'm3'}) {
+    #dbName;
+    constructor({user : u, port : p, pass: w, host: h, cluster: c, dbName: d} = {user: "mongo", port: 47797, pass: 'PNSmQbweckrbuFTCqXmYoaqicgEZpFeF', host: 'mongodb://', cluster: "monorail.proxy.rlwy.net", dbName: 'test'}) {
         if(typeof connect.instance === 'object'){
             return connect.instance;
         }
@@ -51,7 +51,7 @@ export class connect {
         await this.#open();
     }
     async #open () {
-        this.conexion = new MongoClient(`su cadena`)
+        this.conexion = new MongoClient(`${this.getHost}${this.user}:${this.getPass}@${this.getCluster}:${this.port}/`)
         await this.conexion.connect();
         
     }
