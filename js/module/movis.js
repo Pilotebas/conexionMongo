@@ -68,4 +68,37 @@ export class movis extends connect {
         ]).toArray();
         return res;
     }
+
+    async getMoviesWithMiguelAsPrincipal() {
+        let res = await this.collection.aggregate([
+            { $match: { character: { $elemMatch: { rol: "principal", apodo: "Miguel" } } } },
+            { $project: { _id: 0, name: 1 } }
+        ]).toArray();
+        return res;
+    }
+
+    async getMoviesWithOver100Copies() {
+        let res = await this.collection.aggregate([
+            { $match: { format: { $elemMatch: { copies: { $gt: 100 } } } } },
+            { $project: { _id: 0, name: 1 } }
+        ]).toArray();
+        return res;
+    }
+    
+    async getMoviesWithActor1() {
+        let res = await this.collection.aggregate([
+            { $match: { "character.id_actor": 1 } },
+            { $project: { _id: 0, name: 1 } }
+        ]).toArray();
+        return res;
+    }
+    
+    async getMoviesWithArthurAsSecondary() {
+        let res = await this.collection.aggregate([
+            { $match: { character: { $elemMatch: { rol: "secundario", apodo: "Arthur" } } } },
+            { $project: { _id: 0, name: 1 } }
+        ]).toArray();
+        return res;
+    }
+    
 }
