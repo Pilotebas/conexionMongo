@@ -29,9 +29,9 @@ export class movis extends connect {
         return res;
     }
 
-    async getBlurayMoviesOver200Copies() {
+    async getDvdMoviesUnder10Value() {
         let res = await this.collection.aggregate([
-            { $match: { format: { $elemMatch: { name: "Bluray", copies: { $gt: 200 } } } } },
+            { $match: { format: { $elemMatch: { name: "dvd", value: { $lt: 10 } } } } },
             { $project: { _id: 0, name: 1 } } // Solo mostrar el nombre de la película
         ]).toArray();
         return res;
