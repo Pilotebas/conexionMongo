@@ -2,4 +2,4 @@ import { movis } from './js/module/movis.js';
 
 
 let movie = new movis();
-console.log(await movie.getDvdMoviesUnder10Value());
+console.log(await movie.getBlurayMovies());

@@ -37,5 +37,29 @@ export class movis extends connect {
         return res;
     }
 
+    async getMoviesWithCobbCharacter() {
+        let res = await this.collection.aggregate([
+            { $match: { character: { $elemMatch: { apodo: "Cobb" } } } },
+            { $project: { _id: 0, name: 1 } } // Solo mostrar el nombre de la película
+        ]).toArray();
+        return res;
+    }
 
+    async getMoviesWithActors2And3() {
+        let res = await this.collection.aggregate([
+            { $match: { "character.id_actor": { $in: [2, 3] } } },
+            { $project: { _id: 0, name: 1 } } // Solo mostrar el nombre de la película
+        ]).toArray();
+        return res;
+    }
+
+    async getBlurayMovies() {
+        let res = await this.collection.aggregate([
+            { $match: { format: { $elemMatch: { name: "Bluray" } } } },
+            { $project: { _id: 0, name: 1 } }
+        ]).toArray();
+        return res;
+    }
+
+    
 }
