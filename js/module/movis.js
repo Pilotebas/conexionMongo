@@ -61,5 +61,11 @@ export class movis extends connect {
         return res;
     }
 
-    
+    async getAllFictionMovies(){
+        let res  = await this.collection.aggregate([
+            { $match : { genre: "Ciencia Ficción"}},
+            { $project: { _id:0, name:1}}
+        ]).toArray();
+        return res;
+    }
 }
