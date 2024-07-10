@@ -13,15 +13,12 @@ export class movis extends connect {
         return this;
     }
 
-    async getAllMovis(){
+    async getAllActionMovies() {
         let res = await this.collection.aggregate([
-            {
-                $project: {
-                    name:1
-                }
-            }
-
+            { $match: { genre: "Accion" } }, 
+            { $project: { _id: 0, name: 1 } } 
         ]).toArray();
-        return res
+        return res;
     }
+
 }

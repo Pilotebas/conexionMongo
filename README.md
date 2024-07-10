@@ -1,13 +1,13 @@
 1. **Buscar películas del género "Accion":**
 
    ``` javascript
-db.movies.find({"genre": "Accion"},{"_id ": 0, "name" : 1});
+   db.movies.find({"genre": "Accion"},{"_id ": 0, "name" : 1});
    ```
 
 2. **Buscar películas con más de 200 copias en formato "Bluray":**
 
    ``` javascript
-db.movies.find({ "format": { "$elemMatch": { "name": "Bluray", "copies": { "$gt": 200 } } } },{"_id": 0, "name" : 1,"format.name": 1, "format.value": 1});
+   db.movies.find({ "format": { "$elemMatch": { "name": "Bluray", "copies": { "$gt": 200 } } } },{"_id": 0, "name" : 1,"format.name": 1, "format.value": 1});
    ```
 
 3. **Buscar películas donde el valor del formato "dvd" sea menor que 10:**
