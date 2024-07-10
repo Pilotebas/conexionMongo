@@ -21,4 +21,21 @@ export class movis extends connect {
         return res;
     }
 
+    async getBlurayMoviesOver200Copies() {
+        let res = await this.collection.aggregate([
+            { $match: { format: { $elemMatch: { name: "Bluray", copies: { $gt: 200 } } } } },
+            { $project: { _id: 0, name: 1 } } // Solo mostrar el nombre de la película
+        ]).toArray();
+        return res;
+    }
+
+    async getBlurayMoviesOver200Copies() {
+        let res = await this.collection.aggregate([
+            { $match: { format: { $elemMatch: { name: "Bluray", copies: { $gt: 200 } } } } },
+            { $project: { _id: 0, name: 1 } } // Solo mostrar el nombre de la película
+        ]).toArray();
+        return res;
+    }
+
+
 }
